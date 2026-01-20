@@ -131,22 +131,24 @@ const App: React.FC = () => {
   return (
     <Layout user={user} onLogout={handleLogout}>
       {!user ? (
-        <div className="flex flex-col items-center py-12">
-          <div className="text-center mb-12 max-w-2xl px-4">
-             <div className="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-indigo-100">
-               <span className="text-white font-bold text-3xl">L</span>
+        <div className="flex flex-col items-center py-6 sm:py-12">
+          <div className="text-center mb-8 sm:mb-12 max-w-2xl px-4">
+             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-xl shadow-indigo-100">
+               <span className="text-white font-bold text-2xl sm:text-3xl">L</span>
              </div>
-             <h1 className="text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
-               Your Mind, <span className="text-indigo-600">Illuminated.</span>
+             <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 mb-4 sm:mb-6 tracking-tight leading-tight">
+               Lumina - <span className="text-indigo-600">Your personal diary.</span>
              </h1>
-             <p className="text-xl text-slate-500 mb-8 font-serif italic">
+             <p className="text-base sm:text-xl text-slate-500 mb-6 sm:mb-8 font-serif italic">
                A secure sanctuary for your deepest reflections, enhanced by AI clarity and cloud backup.
              </p>
           </div>
-          <AuthForm onAuthSuccess={handleAuthSuccess} />
+          <div className="w-full px-4">
+            <AuthForm onAuthSuccess={handleAuthSuccess} />
+          </div>
         </div>
       ) : (
-        <div className="animate-in fade-in duration-500">
+        <div className="animate-in fade-in duration-500 px-2 sm:px-0">
           {view === 'list' ? (
             <JournalList
               entries={entries}
