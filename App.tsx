@@ -33,7 +33,6 @@ const App: React.FC = () => {
 
     initAuth();
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session?.user) {
         const authedUser = {
@@ -79,11 +78,13 @@ const App: React.FC = () => {
   const handleNewEntry = useCallback(() => {
     setEditingEntry(null);
     setView('editor');
+    window.scrollTo(0, 0);
   }, []);
 
   const handleEditEntry = useCallback((entry: JournalEntry) => {
     setEditingEntry(entry);
     setView('editor');
+    window.scrollTo(0, 0);
   }, []);
 
   const handleSaveEntry = useCallback(async (entry: JournalEntry) => {
@@ -93,6 +94,7 @@ const App: React.FC = () => {
         await fetchEntries(user.id);
       }
       setView('list');
+      window.scrollTo(0, 0);
     } catch (err: any) {
       console.error("Failed to save entry:", err);
       const msg = err?.message || JSON.stringify(err);
@@ -117,7 +119,7 @@ const App: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="min-h-[100dvh] flex items-center justify-center bg-slate-50">
         <div className="animate-pulse flex flex-col items-center">
           <div className="w-12 h-12 bg-indigo-600 rounded-lg mb-4 flex items-center justify-center">
              <span className="text-white font-bold">L</span>
@@ -131,24 +133,22 @@ const App: React.FC = () => {
   return (
     <Layout user={user} onLogout={handleLogout}>
       {!user ? (
-        <div className="flex flex-col items-center py-6 sm:py-12">
-          <div className="text-center mb-8 sm:mb-12 max-w-2xl px-4">
-             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-xl shadow-indigo-100">
+        <div className="flex flex-col items-center py-6 sm:py-12 px-4">
+          <div className="text-center mb-10 max-w-2xl">
+             <div className="w-14 h-14 sm:w-16 sm:h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-indigo-100">
                <span className="text-white font-bold text-2xl sm:text-3xl">L</span>
              </div>
-             <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 mb-4 sm:mb-6 tracking-tight leading-tight">
+             <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">
                Lumina - <span className="text-indigo-600">Your personal diary.</span>
              </h1>
-             <p className="text-base sm:text-xl text-slate-500 mb-6 sm:mb-8 font-serif italic">
-               A secure sanctuary for your deepest reflections, enhanced by AI clarity and cloud backup.
+             <p className="text-base sm:text-xl text-slate-500 font-serif italic">
+               A secure sanctuary for your reflections.
              </p>
           </div>
-          <div className="w-full px-4">
-            <AuthForm onAuthSuccess={handleAuthSuccess} />
-          </div>
+          <AuthForm onAuthSuccess={handleAuthSuccess} />
         </div>
       ) : (
-        <div className="animate-in fade-in duration-500 px-2 sm:px-0">
+        <div className="animate-in fade-in duration-500 w-full">
           {view === 'list' ? (
             <JournalList
               entries={entries}
