@@ -2,7 +2,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
 const getAIClient = () => {
-  return new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  const apiKey = (typeof process !== 'undefined' && process.env) ? (process.env.API_KEY || '') : '';
+  return new GoogleGenAI({ apiKey });
 };
 
 export const generateJournalInsights = async (content: string) => {

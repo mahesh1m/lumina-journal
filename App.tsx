@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { User, JournalEntry } from './types';
-import { storageService } from './services/storageService';
-import { supabase } from './services/supabaseClient';
-import Layout from './components/Layout';
-import AuthForm from './components/AuthForm';
-import JournalList from './components/JournalList';
-import JournalEditor from './components/JournalEditor';
+import { User, JournalEntry } from './types.ts';
+import { storageService } from './services/storageService.ts';
+import { supabase } from './services/supabaseClient.ts';
+import Layout from './components/Layout.tsx';
+import AuthForm from './components/AuthForm.tsx';
+import JournalList from './components/JournalList.tsx';
+import JournalEditor from './components/JournalEditor.tsx';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);

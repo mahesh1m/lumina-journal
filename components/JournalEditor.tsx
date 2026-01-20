@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { JournalEntry, User } from '../types';
-import { generateJournalInsights, suggestTitleAndMood } from '../services/geminiService';
+import { JournalEntry, User } from '../types.ts';
+import { generateJournalInsights, suggestTitleAndMood } from '../services/geminiService.ts';
 
 interface JournalEditorProps {
   user: User;
@@ -68,7 +68,6 @@ const JournalEditor: React.FC<JournalEditorProps> = ({ user, entry, onSave, onCa
     <div className="animate-in fade-in zoom-in-95 duration-500 bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col lg:flex-row min-h-[calc(100dvh-5rem)] lg:h-[calc(100vh-10rem)] lg:min-h-[600px] mb-10">
       {/* Main Editor Section */}
       <div className="flex-grow flex flex-col min-w-0">
-        {/* Sticky Action Header - Fixed offset for mobile layout header */}
         <div className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-slate-100 p-4 sm:p-6 flex items-center justify-between">
           <button
             onClick={onCancel}
@@ -155,7 +154,6 @@ const JournalEditor: React.FC<JournalEditorProps> = ({ user, entry, onSave, onCa
         </div>
       </div>
 
-      {/* AI Sidebar */}
       <div className="w-full lg:w-80 xl:w-96 bg-slate-50 border-t lg:border-t-0 lg:border-l border-slate-200 p-6 sm:p-8 flex flex-col">
         <div className="flex items-center space-x-3 mb-6">
            <div className="w-9 h-9 bg-indigo-100 rounded-xl flex items-center justify-center">
